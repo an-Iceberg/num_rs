@@ -1,6 +1,7 @@
 #![allow(non_snake_case)]
+#![allow(mixed_script_confusables)]
 
-use num_rs::{int_2, int_3, int_4};
+use num_rs::integral::{int_2, int_3, int_4};
 
 fn main()
 {
