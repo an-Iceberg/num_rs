@@ -23,7 +23,7 @@ fn main()
 
   println!("Fläche: {:.4}", int_2(a, b, f, h));
 
-  fn g(x: f64) -> f64 { (1. + d1_2(f, x, h)).sqrt() }
+  fn g(x: f64) -> f64 { (1. + d1_2(f, x, h).powi(2)).sqrt() }
   println!("Bogenlänge: {:.4}", int_2(a, b, g, h));
 
   fn k(x: f64) -> f64 { f(x).powi(2) }
