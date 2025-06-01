@@ -1,6 +1,6 @@
 // ∂¹
 
-pub fn part1_2(f: fn(Vec<f64>) -> f64, x: Vec<f64>, i: usize, h: f64) -> f64
+pub fn part(f: fn(&Vec<f64>) -> f64, x: Vec<f64>, i: usize, h: f64) -> f64
 {
   // Note: this is inefficient b/c it requires a ton of extra memory (but it might still be fast)
 
@@ -10,7 +10,7 @@ pub fn part1_2(f: fn(Vec<f64>) -> f64, x: Vec<f64>, i: usize, h: f64) -> f64
   a[i] -= h;
   b[i] += h;
 
-  return (-0.5*f(a) + 0.5*f(b)) / h;
+  return (-0.5*f(&a) + 0.5*f(&b)) / h;
 }
 
 pub fn part1_4(f: fn(&Vec<f64>) -> f64, x: Vec<f64>, i: usize, h: f64) -> f64

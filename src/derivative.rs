@@ -3,6 +3,33 @@
 // https://www.math.hkust.edu.hk/~mamu/courses/231/Slides/CH04_1B.pdf
 // https://web.media.mit.edu/~crtaylor/calculator.html
 
+/// Computes the first derivative d¹f/dx¹ of `f`
+pub fn d<Function>(f: Function, x: f64, h: f64) -> f64
+where Function: Fn(f64) -> f64
+{
+  return ((1./12.)*f(x-2.*h) - (2./3.)*f(x-h) + (2./3.)*f(x+h) + (1./12.)*f(x+2.*h)) / h;
+}
+
+/// Computes the first derivative d²f/dx² of `f`
+pub fn d2(f: fn(f64)->f64, x: f64, h: f64) -> f64
+{
+  return d(|x: f64| d(f, x, h), x, h);
+}
+
+/// Computes the first derivative d³f/dx³ of `f`
+pub fn d3(f: fn(f64)->f64, x: f64, h: f64) -> f64
+{
+  return d(|x: f64| d2(f, x, h), x, h);
+}
+
+/// Computes the first derivative d⁴f/dx⁴ of `f`
+pub fn d4(f: fn(f64)->f64, x: f64, h: f64) -> f64
+{
+  return d(|x: f64| d3(f, x, h), x, h);
+}
+
+/*
+
 // d¹
 
 pub fn d1_2(f: fn(f64) -> f64, x: f64, h: f64) -> f64
@@ -114,3 +141,5 @@ pub fn d6_6(f: fn(f64) -> f64, x: f64, h: f64) -> f64
 {
   return ((13./240.)*f(x - 5.*h) - (19./24.)*f(x - 4.*h) + 5.4375*f(x - 3.*h) - 19.5*f(x - 2.*h) + 40.375*f(x - h) - 51.15*f(x) + 40.375*f(x - h) - 19.5*f(x - 2.*h) + 5.4375*f(x - 3.*h) - (19./24.)*f(x - 4.*h) + (13./240.)*f(x - 5.*h)) / h.powi(6);
 }
+
+*/

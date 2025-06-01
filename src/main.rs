@@ -5,7 +5,7 @@
 
 use std::f64::consts::PI;
 
-use num_rs::{derivative::d1_2, integral::{int_2, int_3, int_4}};
+use num_rs::{derivative::d, integral::{int_2, int_3, int_4}};
 
 const h: f64 = 0.001;
 const a: f64 = 1.;
@@ -23,8 +23,8 @@ fn main()
 
   println!("Fläche: {:.4}", int_2(a, b, f, h));
 
-  // fn g(x: f64) -> f64 { (1. + d1_2(f, x, h).powi(2)).sqrt() }
-  println!("Bogenlänge: {:.4}", int_2(a, b, |x: f64| (1. + d1_2(f, x, h).powi(2)).sqrt(), h));
+  // fn g(x: f64) -> f64 { (1. + d(f, x, h).powi(2)).sqrt() }
+  println!("Bogenlänge: {:.4}", int_2(a, b, |x: f64| (1. + d(f, x, h).powi(2)).sqrt(), h));
 
   // fn k(x: f64) -> f64 { f(x).powi(2) }
   println!("Rotationsvumen: {:.4}", PI*int_2(a, b, |x: f64| f(x).powi(2), h));
