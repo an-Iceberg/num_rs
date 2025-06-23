@@ -39,3 +39,17 @@ pub fn int_4(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
     .map(|i| 7.*f(x(4.*i - 4.)) + 32.*f(x(4.*i - 3.)) + 12.*f(x(4.*i - 2.)) + 32.*f(x(4.*i - 1.)) + 7.*f(x(4.*i)))
     .sum::<f64>();
 }
+
+/// Calculates the integral of `f` between `a` and `b` using
+/// [Weddle's rule](https://mathworld.wolfram.com/WeddlesRule.html)
+/// , so using polynomials of 6ᵗʰ degree.
+pub fn int_6(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
+{
+  let n = ((b - a) / h).ceil() as i64;
+  let x = |i: f64| a +(i * h);
+
+  return (3./10.)*h*(1..=n/6)
+    .map(|i| i as f64)
+    .map(|i| f(x(6.*i-6.)) + 5.*f(x(6.*i-5.)) + f(x(6.*i-4.)) + 6.*f(x(6.*i-3.)) + f(x(6.*i-2.)) + 5.*f(x(6.*i-1.)) + f(x(6.*i)))
+    .sum::<f64>();
+}

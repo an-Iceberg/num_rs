@@ -5,7 +5,7 @@
 
 use std::f64::consts::PI;
 
-use num_rs::{derivative::d, integral::{int_2, int_3, int_4}};
+use num_rs::{derivative::d, integral::{int_2, int_3, int_4, int_6}};
 
 const h: f64 = 0.001;
 const a: f64 = 1.;
@@ -19,6 +19,7 @@ fn main()
   println!("Simpon's 1/3: ε = {:.2e}", (int_2(a, b, f, h) - (F(b) - F(a))).abs());
   println!("Simpon's 3/8: ε = {:.2e}", (int_3(a, b, f, h) - (F(b) - F(a))).abs());
   println!("Boole's :     ε = {:.2e}", (int_4(a, b, f, h) - (F(b) - F(a))).abs());
+  println!("Weddle's :    ε = {:.2e}", (int_6(a, b, f, h) - (F(b) - F(a))).abs());
   println!();
 
   println!("Fläche: {:.4}", int_2(a, b, f, h));
