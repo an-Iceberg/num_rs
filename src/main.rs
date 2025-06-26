@@ -7,9 +7,9 @@ use std::f64::consts::PI;
 
 use num_rs::{derivative::d, integral::{int_2, int_3, int_4, int_6}};
 
-const h: f64 = 0.001;
-const a: f64 = 1.;
-const b: f64 = 5.;
+const h: f64 = 0.01;
+const a: f64 = 1.24;
+const b: f64 = 5.38;
 
 fn f(x: f64) -> f64 { x.cos() }
 fn F(x: f64) -> f64 { x.sin() }
