@@ -3,29 +3,33 @@
 // https://www.math.hkust.edu.hk/~mamu/courses/231/Slides/CH04_1B.pdf
 // https://web.media.mit.edu/~crtaylor/calculator.html
 
+use crate::λ;
+
 /// Computes the first derivative d¹f/dx¹ of `f`
 pub fn d<Function>(f: Function, x: f64, h: f64) -> f64
 where Function: Fn(f64) -> f64
 {
-  return ((1./12.)*f(x-2.*h) - (2./3.)*f(x-h) + (2./3.)*f(x+h) + (1./12.)*f(x+2.*h)) / h;
+  return (f(x - 2.*h) - 8.*f(x - h) + 8.*f(x + h) - f(x + 2.*h)) / (12.*h);
 }
 
-/// Computes the first derivative d²f/dx² of `f`
+// TODO: create a derivation algorithm that finds the value with the highest precision.
+
+/// Computes the second derivative d²f/dx² of `f`
 pub fn d2(f: fn(f64)->f64, x: f64, h: f64) -> f64
 {
-  return d(|x: f64| d(f, x, h), x, h);
+  return d(λ!{x => d(f, x, h)}, x, h);
 }
 
-/// Computes the first derivative d³f/dx³ of `f`
+/// Computes the third derivative d³f/dx³ of `f`
 pub fn d3(f: fn(f64)->f64, x: f64, h: f64) -> f64
 {
-  return d(|x: f64| d2(f, x, h), x, h);
+  return d(λ!{x => d2(f, x, h)}, x, h);
 }
 
-/// Computes the first derivative d⁴f/dx⁴ of `f`
+/// Computes the fourth derivative d⁴f/dx⁴ of `f`
 pub fn d4(f: fn(f64)->f64, x: f64, h: f64) -> f64
 {
-  return d(|x: f64| d3(f, x, h), x, h);
+  return d(λ!{x => d3(f, x, h)}, x, h);
 }
 
 /*

@@ -1,10 +1,12 @@
+use crate::λ;
+
 /// Calculates the integral of `f` between `a` and `b` using
 /// [Simpson's ⅓ rule](https://en.wikipedia.org/wiki/Simpson%27s_rule#Composite_Simpson's_1/3_rule)
 /// , so using polynomials of 2ⁿᵈ degree.
 pub fn int_2(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
 {
   let n = ((b - a) / h).ceil() as i64;
-  let x = |i: f64| a +(i * h);
+  let x = λ!{i => a + (i*h)};
 
   return (1./3.)*h*(1..=n/2)
     .map(|i| i as f64)
@@ -38,6 +40,8 @@ pub fn int_4(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
 {
   let n = ((b - a) / h).ceil() as i64;
   let x = |i: f64| a +(i * h);
+
+  // The last segment is probably not calculated well.
 
   return (2./45.)*h*(1..=n/4)
     .map(|i| i as f64)

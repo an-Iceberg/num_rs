@@ -4,8 +4,24 @@
 #![allow(dead_code)]
 
 pub mod derivative;
-pub mod partial;
 pub mod gradient;
-pub mod jacobian;
-
 pub mod integral;
+pub mod jacobian;
+pub mod partial;
+
+/// Macro for syntactically more pleasing lambda functions/closures.
+///
+/// Preferably write it like this: `λ!{n => n*2}`.
+///
+/// ---
+///
+/// I would have loved to implement syntax that looks like this: `λ!{n -> n*2}`
+/// but Rust doesn't allow such syntax :(
+#[macro_export]
+macro_rules! λ
+{
+  ( $($variable:ident $(: $type:ty)?),* => $expression:expr ) =>
+  {
+    |$($variable $(: $type)?),*| $expression
+  }
+}

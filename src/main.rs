@@ -3,16 +3,19 @@
 #![allow(clippy::needless_return)]
 #![allow(non_upper_case_globals)]
 
-use std::f64::consts::PI;
+use std::{f64::consts::PI, ops::Neg};
 
-use num_rs::{derivative::d, integral::{int_2, int_3, int_4, int_6}};
+use num_rs::{derivative::{d, d2}, integral::{int_2, int_3, int_4, int_6}, λ};
 
 const h: f64 = 0.01;
 const a: f64 = 1.24;
 const b: f64 = 5.38;
+const π: f64 = PI;
 
-fn f(x: f64) -> f64 { x.cos() }
 fn F(x: f64) -> f64 { x.sin() }
+fn f(x: f64) -> f64 { x.cos() }
+fn df(x: f64) -> f64 { x.sin().neg() }
+fn d2f(x: f64) -> f64 { x.cos().neg() }
 
 fn main()
 {
@@ -25,8 +28,12 @@ fn main()
   println!("Fläche: {:.4}", int_2(a, b, f, h));
 
   // fn g(x: f64) -> f64 { (1. + d(f, x, h).powi(2)).sqrt() }
-  println!("Bogenlänge: {:.4}", int_2(a, b, |x: f64| (1. + d(f, x, h).powi(2)).sqrt(), h));
+  println!("Bogenlänge: {:.4}", int_2(a, b, λ!{x => (1. + d(f, x, h).powi(2)).sqrt()}, h));
 
   // fn k(x: f64) -> f64 { f(x).powi(2) }
-  println!("Rotationsvumen: {:.4}", PI*int_2(a, b, |x: f64| f(x).powi(2), h));
+  println!("Rotationsvumen: {:.4}", π*int_2(a, b, λ!{x => f(x).powi(2)}, h));
+  println!();
+
+  println!("d(f): ε = {:.2e}", (df(5.) - d(f, 5., 0.001)).abs());
+  println!("d2(f): ε = {:.2e}", (d2f(5.) - d2(f, 5., 0.001)).abs());
 }
