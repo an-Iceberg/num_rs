@@ -26,11 +26,7 @@ fn main()
   println!();
 
   println!("Fläche: {:.4}", int_2(a, b, f, h));
-
-  // fn g(x: f64) -> f64 { (1. + d(f, x, h).powi(2)).sqrt() }
   println!("Bogenlänge: {:.4}", int_2(a, b, λ!{x => (1. + d(f, x, h).powi(2)).sqrt()}, h));
-
-  // fn k(x: f64) -> f64 { f(x).powi(2) }
   println!("Rotationsvumen: {:.4}", π*int_2(a, b, λ!{x => f(x).powi(2)}, h));
   println!();
 
