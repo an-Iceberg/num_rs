@@ -17,6 +17,7 @@ fn f(x: f64) -> f64 { x.cos() }
 fn df(x: f64) -> f64 { x.sin().neg() }
 fn d2f(x: f64) -> f64 { x.cos().neg() }
 
+
 fn main()
 {
   println!("Simpon's 1/3: ε = {:.2e}", (int_2(a, b, f, h) - (F(b) - F(a))).abs());

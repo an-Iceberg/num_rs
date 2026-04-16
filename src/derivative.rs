@@ -5,6 +5,9 @@
 
 use crate::λ;
 
+// TODO: measure efficiently for calculating derivatives.
+// TODO: implement faster methods for calculating derivatives.
+
 /// Computes the first derivative d¹f/dx¹ of `f`
 pub fn d<Function>(f: Function, x: f64, h: f64) -> f64
 where Function: Fn(f64) -> f64
