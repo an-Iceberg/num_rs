@@ -41,8 +41,6 @@ pub fn int_4(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
   let mut n = ((b - a) / h).ceil() as i64;
   let x = |i: f64| a +(i * h);
 
-  // The last segment is probably not calculated well.
-
   n -= n % 4;
 
   let last_point = x(n as f64); // Casting from int to float is expensive, no? 😬
