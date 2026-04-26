@@ -11,10 +11,18 @@ pub fn int_2(a: f64, b: f64, f: fn(f64) -> f64, h: f64) -> f64
   let n = ((b - a) / h).ceil() as i64;
   let x = λ!{i => a + (i*h)};
 
-  return (1./3.)*h*(1..=n/2)
-    .map(|i| i as f64)
-    .map(|i| f(x(2.*i - 2.)) + 4.*f(x(2.*i - 1.)) + f(x(2.*i)))
-    .sum::<f64>();
+  let part = λ!{factor: f64, subtrahend: f64 =>
+    (1..=n/2)
+      .map(λ!{i => factor * f(x(2.*i as f64 - subtrahend))})
+      .sum::<f64>()
+  };
+
+  return (1./3.)*h*(part(1., 2.) + part(4., 1.) + part(1., 0.));
+
+  // return (1./3.)*h*(1..=n/2)
+  //   .map(|i| i as f64)
+  //   .map(|i| f(x(2.*i - 2.)) + 4.*f(x(2.*i - 1.)) + f(x(2.*i)))
+  //   .sum::<f64>();
 }
 
 /// Calculates the integral of `f` between `a` and `b` using
