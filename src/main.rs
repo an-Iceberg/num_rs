@@ -32,6 +32,12 @@ fn main()
   println!("Rotationsvumen: {:.4}", π*int_2(a, b, λ!{x => f(x).powi(2)}, h));
   println!();
 
+  let arc_len = λ!{a, b, f: fn(f64) -> f64, h => int_2(a, b, λ!{x => (1. + d(f, x, h).powi(2)).sqrt()}, h)};
+  dbg!{arc_len(a, b, f, h)};
+  let rot_vol = λ!{a, b, f: fn(f64) -> f64, h => π * int_2(a, b, λ!{x => f(x).powi(2)}, h)};
+  dbg!{rot_vol(a, b, f, h)};
+  println!();
+
   println!("d(f): ε = {:.2e}", (df(5.) - d(f, 5., 0.001)).abs());
   println!("d2(f): ε = {:.2e}", (d2f(5.) - d2(f, 5., 0.001)).abs());
 
