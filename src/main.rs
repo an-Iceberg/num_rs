@@ -13,15 +13,16 @@ fn main()
   let b = 5.38;
   let π = PI;
 
-  let F = λ! {x: f64 => x.sin()};
-  let f = λ! {x: f64 => x.cos()};
+  let F = λ! {x: f64 => x.sin()}; // Root function
+  let f = λ! {x: f64 => x.cos()}; // Function
   let df = λ! {x: f64 => x.sin().neg()};
   let d2f = λ! {x: f64 => x.cos().neg()};
+  let I = λ!{a, b => F(b) - F(a)}; // Integral
 
-  println!("Simpon's 1/3: ε = {:.2e}", (int_2(a, b, f, h) - (F(b) - F(a))).abs());
-  println!("Simpon's 3/8: ε = {:.2e}", (int_3(a, b, f, h) - (F(b) - F(a))).abs());
-  println!("Boole's :     ε = {:.2e}", (int_4(a, b, f, h) - (F(b) - F(a))).abs());
-  println!("Weddle's :    ε = {:.2e}", (int_6(a, b, f, h) - (F(b) - F(a))).abs());
+  println!("Simpon's 1/3: ε = {:.2e}", (int_2(a, b, f, h) - (I(a, b))).abs());
+  println!("Simpon's 3/8: ε = {:.2e}", (int_3(a, b, f, h) - (I(a, b))).abs());
+  println!("Boole's :     ε = {:.2e}", (int_4(a, b, f, h) - (I(a, b))).abs());
+  println!("Weddle's :    ε = {:.2e}", (int_6(a, b, f, h) - (I(a, b))).abs());
   println!();
 
   // Area
