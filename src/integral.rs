@@ -3,6 +3,8 @@ use crate::λ;
 // TODO: measure efficiently for calculating integrals.
 // TODO: implement faster methods for calculating integrals.
 
+// TODO: add tests.
+
 /// Calculates the integral of `f` between `a` and `b` using
 /// [Simpson's 1/3 rule](https://en.wikipedia.org/wiki/Simpson%27s_rule#Composite_Simpson's_1/3_rule)
 /// , so using polynomials of 2ⁿᵈ degree.

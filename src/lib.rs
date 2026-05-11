@@ -8,6 +8,9 @@ pub mod gradient;
 pub mod integral;
 pub mod jacobian;
 pub mod partial;
+pub mod cry;
+
+// TODO: restructure this akin to `numpy` and `scipy`.
 
 /// Macro for syntactically more pleasing lambda functions/closures.
 ///
