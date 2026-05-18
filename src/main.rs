@@ -3,8 +3,8 @@
 #![allow(clippy::needless_return)]
 #![allow(non_upper_case_globals)]
 
-use std::{f64::consts::PI, ops::Neg};
-use num_rs::{derivative::{d, d2}, integral::{int_2, int_3, int_4, int_6}, λ};
+use std::{f64::consts::PI, ops::{Add, Mul, Neg}};
+use num_rs::{derivative::{d, d2}, integral::{int_2, int_3, int_4, int_6}, polynomial::Poly, λ};
 
 fn main()
 {
@@ -55,4 +55,10 @@ fn main()
   dbg!{format!("{:.5}", int_3(-5., -2., f, precision))};
   dbg!{format!("{:.5}", int_4(-5., -2., f, precision))};
   dbg!{format!("{:.5}", int_6(-5., -2., f, precision))};
+
+  let f = λ!{ x: f64 => (2.*x.powi(3)) + x };
+  let p = Poly::from_vec(vec![(1, 1.), (3, 2.)]);
+  let x = 5.;
+  dbg!{f(x)};
+  dbg!{p.eval(x)};
 }

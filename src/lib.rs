@@ -3,12 +3,14 @@
 #![allow(non_snake_case)]
 #![allow(dead_code)]
 
+pub mod complex;
+pub mod cry;
 pub mod derivative;
 pub mod gradient;
 pub mod integral;
 pub mod jacobian;
 pub mod partial;
-pub mod cry;
+pub mod polynomial;
 
 // TODO: restructure this akin to `numpy` and `scipy`.
 
